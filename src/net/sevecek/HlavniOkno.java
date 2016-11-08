@@ -146,7 +146,6 @@ public class HlavniOkno extends JFrame {
             }
             if (AX < DX && AX > CX && AY < DY && AY > CY) {
                 srazka();
-                labRyba.setIcon(new ImageIcon(getClass().getResource("/net/sevecek/Nemo-vlevo.png")));
             }
         }
     }
