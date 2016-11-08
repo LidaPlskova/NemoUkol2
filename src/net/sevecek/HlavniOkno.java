@@ -18,14 +18,21 @@ public class HlavniOkno extends JFrame {
     Integer posunX;
     Integer posunY;
 
+    int delkaSmrti;
+
     public HlavniOkno() {
         initComponents();
     }
 
-    private void konecRyby() {
-        labRyba.setVisible(false);
+    private void srazka() {
+        delkaSmrti = 25;
+        labRyba.setIcon(new ImageIcon(getClass().getResource("/net/sevecek/mrtvyNemo-vpravo.png")));
+
+    }
+
+    private void novyZacatek() {
         labRyba.setLocation(0, 0);
-        labRyba.setVisible(true);
+        labRyba.setIcon(new ImageIcon(getClass().getResource("/net/sevecek/Nemo-vpravo.png")));
     }
 
     private void priOtevreniOkna(WindowEvent e) {
@@ -39,6 +46,16 @@ public class HlavniOkno extends JFrame {
     }
 
     private void priTiknutiCasovace(ActionEvent e) {
+        if (delkaSmrti > 0) {
+            delkaSmrti--;
+
+            if (delkaSmrti == 0) {
+                novyZacatek();
+            }
+
+            return;
+        }
+
         Point poziceZraloka;
         Point poziceRyba;
         Integer xRyba;
@@ -126,10 +143,11 @@ public class HlavniOkno extends JFrame {
         DY = yZralok + zralokVyska;
 
         if (BX > CX && BX < DX && BY > CY && BY < DY) {
-            konecRyby();
+            srazka();
         }
         if (AX < DX && AX > CX && AY < DY && AY > CY) {
-            konecRyby();
+            srazka();
+            labRyba.setIcon(new ImageIcon(getClass().getResource("/net/sevecek/Nemo-vlevo.png")));
         }
     }
 
