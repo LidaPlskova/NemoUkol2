@@ -53,101 +53,101 @@ public class HlavniOkno extends JFrame {
                 novyZacatek();
             }
 
-            return;
-        }
+        } else {
 
-        Point poziceZraloka;
-        Point poziceRyba;
-        Integer xRyba;
-        Integer yRyba;
-        Integer rybaSirka;
-        rybaSirka = labRyba.getWidth();
-        Integer rybaVyska;
-        rybaVyska = labRyba.getHeight();
-        Integer xZralok;
-        Integer yZralok;
-        Integer zralokSirka;
-        zralokSirka = labZralok.getWidth();
-        Integer zralokVyska;
-        zralokVyska = labZralok.getHeight();
-        poziceZraloka = labZralok.getLocation();
-        xZralok = poziceZraloka.x;
-        yZralok = poziceZraloka.y;
+            Point poziceZraloka;
+            Point poziceRyba;
+            Integer xRyba;
+            Integer yRyba;
+            Integer rybaSirka;
+            rybaSirka = labRyba.getWidth();
+            Integer rybaVyska;
+            rybaVyska = labRyba.getHeight();
+            Integer xZralok;
+            Integer yZralok;
+            Integer zralokSirka;
+            zralokSirka = labZralok.getWidth();
+            Integer zralokVyska;
+            zralokVyska = labZralok.getHeight();
+            poziceZraloka = labZralok.getLocation();
+            xZralok = poziceZraloka.x;
+            yZralok = poziceZraloka.y;
 
-        if (xZralok < 0) {
-            posunX = 5;
-        }
-        if (xZralok + zralokSirka > contentPane.getWidth()) {
-            posunX = -5;
-        }
-        if (yZralok < 0) {
-            posunY = 5;
-        }
-        if (yZralok + zralokVyska > contentPane.getHeight()) {
-            posunY = -5;
-        }
-
-        xZralok = xZralok + posunX;
-        yZralok = yZralok + posunY;
-
-        poziceZraloka.x = xZralok;
-        poziceZraloka.y = yZralok;
-
-        labZralok.setLocation(poziceZraloka);
-
-        poziceRyba = labRyba.getLocation();
-
-        xRyba = poziceRyba.x;
-        yRyba = poziceRyba.y;
-        if (klavesnice.isKeyDown(KeyEvent.VK_UP)) {
-            if (yRyba > 0) {
-                yRyba = yRyba - 5;
+            if (xZralok < 0) {
+                posunX = 5;
             }
-        }
-        if (klavesnice.isKeyDown(KeyEvent.VK_DOWN)) {
-            if (yRyba + rybaVyska < contentPane.getHeight()) {
-                yRyba = yRyba + 5;
+            if (xZralok + zralokSirka > contentPane.getWidth()) {
+                posunX = -5;
             }
-        }
-        if (klavesnice.isKeyDown(KeyEvent.VK_LEFT)) {
-            labRyba.setIcon(new ImageIcon(getClass().getResource("/net/sevecek/Nemo-vlevo.png")));
-            if (xRyba > 0) {
-                xRyba = xRyba - 5;
+            if (yZralok < 0) {
+                posunY = 5;
             }
-        }
-        if (klavesnice.isKeyDown(KeyEvent.VK_RIGHT)) {
-            labRyba.setIcon(new ImageIcon(getClass().getResource("/net/sevecek/Nemo-vpravo.png")));
-            if (xRyba + rybaSirka < contentPane.getWidth()) {
-                xRyba = xRyba + 5;
+            if (yZralok + zralokVyska > contentPane.getHeight()) {
+                posunY = -5;
             }
-        }
-        poziceRyba.x = xRyba;
-        poziceRyba.y = yRyba;
-        labRyba.setLocation(poziceRyba);
 
-        Integer AX;
-        AX = xRyba;
-        Integer AY;
-        AY = yRyba;
-        Integer BX;
-        BX = xRyba + rybaSirka;
-        Integer BY;
-        BY = yRyba + rybaVyska;
-        Integer CX;
-        CX = xZralok;
-        Integer CY;
-        CY = yZralok;
-        Integer DX;
-        DX = xZralok + zralokSirka;
-        Integer DY;
-        DY = yZralok + zralokVyska;
+            xZralok = xZralok + posunX;
+            yZralok = yZralok + posunY;
 
-        if (BX > CX && BX < DX && BY > CY && BY < DY) {
-            srazka();
-        }
-        if (AX < DX && AX > CX && AY < DY && AY > CY) {
-            srazka();
-            labRyba.setIcon(new ImageIcon(getClass().getResource("/net/sevecek/Nemo-vlevo.png")));
+            poziceZraloka.x = xZralok;
+            poziceZraloka.y = yZralok;
+
+            labZralok.setLocation(poziceZraloka);
+
+            poziceRyba = labRyba.getLocation();
+
+            xRyba = poziceRyba.x;
+            yRyba = poziceRyba.y;
+            if (klavesnice.isKeyDown(KeyEvent.VK_UP)) {
+                if (yRyba > 0) {
+                    yRyba = yRyba - 5;
+                }
+            }
+            if (klavesnice.isKeyDown(KeyEvent.VK_DOWN)) {
+                if (yRyba + rybaVyska < contentPane.getHeight()) {
+                    yRyba = yRyba + 5;
+                }
+            }
+            if (klavesnice.isKeyDown(KeyEvent.VK_LEFT)) {
+                labRyba.setIcon(new ImageIcon(getClass().getResource("/net/sevecek/Nemo-vlevo.png")));
+                if (xRyba > 0) {
+                    xRyba = xRyba - 5;
+                }
+            }
+            if (klavesnice.isKeyDown(KeyEvent.VK_RIGHT)) {
+                labRyba.setIcon(new ImageIcon(getClass().getResource("/net/sevecek/Nemo-vpravo.png")));
+                if (xRyba + rybaSirka < contentPane.getWidth()) {
+                    xRyba = xRyba + 5;
+                }
+            }
+            poziceRyba.x = xRyba;
+            poziceRyba.y = yRyba;
+            labRyba.setLocation(poziceRyba);
+
+            Integer AX;
+            AX = xRyba;
+            Integer AY;
+            AY = yRyba;
+            Integer BX;
+            BX = xRyba + rybaSirka;
+            Integer BY;
+            BY = yRyba + rybaVyska;
+            Integer CX;
+            CX = xZralok;
+            Integer CY;
+            CY = yZralok;
+            Integer DX;
+            DX = xZralok + zralokSirka;
+            Integer DY;
+            DY = yZralok + zralokVyska;
+
+            if (BX > CX && BX < DX && BY > CY && BY < DY) {
+                srazka();
+            }
+            if (AX < DX && AX > CX && AY < DY && AY > CY) {
+                srazka();
+                labRyba.setIcon(new ImageIcon(getClass().getResource("/net/sevecek/Nemo-vlevo.png")));
+            }
         }
     }
 
