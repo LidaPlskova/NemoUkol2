@@ -19,6 +19,24 @@ public class HlavniOkno extends JFrame {
     Integer posunY;
 
     int delkaSmrti;
+    Point poziceZraloka;
+    Point poziceRyba;
+    Integer xRyba;
+    Integer yRyba;
+    Integer rybaSirka;
+    Integer rybaVyska;
+    Integer xZralok;
+    Integer yZralok;
+    Integer zralokSirka;
+    Integer zralokVyska;
+    Integer AX;
+    Integer AY;
+    Integer BX;
+    Integer BY;
+    Integer CX;
+    Integer CY;
+    Integer DX;
+    Integer DY;
 
     public HlavniOkno() {
         initComponents();
@@ -45,6 +63,90 @@ public class HlavniOkno extends JFrame {
         casovac.stop();
     }
 
+    private void pohybZraloka() {
+        zralokSirka = labZralok.getWidth();
+
+        zralokVyska = labZralok.getHeight();
+        poziceZraloka = labZralok.getLocation();
+        xZralok = poziceZraloka.x;
+        yZralok = poziceZraloka.y;
+
+        if (xZralok < 0) {
+            posunX = 5;
+        }
+        if (xZralok + zralokSirka > contentPane.getWidth()) {
+            posunX = -5;
+        }
+        if (yZralok < 0) {
+            posunY = 5;
+        }
+        if (yZralok + zralokVyska > contentPane.getHeight()) {
+            posunY = -5;
+        }
+
+        xZralok = xZralok + posunX;
+        yZralok = yZralok + posunY;
+
+        poziceZraloka.x = xZralok;
+        poziceZraloka.y = yZralok;
+
+        labZralok.setLocation(poziceZraloka);
+    }
+
+    private void pohybRyby() {
+        rybaSirka = labRyba.getWidth();
+
+        rybaVyska = labRyba.getHeight();
+
+        poziceRyba = labRyba.getLocation();
+
+        xRyba = poziceRyba.x;
+        yRyba = poziceRyba.y;
+        if (klavesnice.isKeyDown(KeyEvent.VK_UP)) {
+            if (yRyba > 0) {
+                yRyba = yRyba - 5;
+            }
+        }
+        if (klavesnice.isKeyDown(KeyEvent.VK_DOWN)) {
+            if (yRyba + rybaVyska < contentPane.getHeight()) {
+                yRyba = yRyba + 5;
+            }
+        }
+        if (klavesnice.isKeyDown(KeyEvent.VK_LEFT)) {
+            labRyba.setIcon(new ImageIcon(getClass().getResource("/net/sevecek/Nemo-vlevo.png")));
+            if (xRyba > 0) {
+                xRyba = xRyba - 5;
+            }
+        }
+        if (klavesnice.isKeyDown(KeyEvent.VK_RIGHT)) {
+            labRyba.setIcon(new ImageIcon(getClass().getResource("/net/sevecek/Nemo-vpravo.png")));
+            if (xRyba + rybaSirka < contentPane.getWidth()) {
+                xRyba = xRyba + 5;
+            }
+        }
+        poziceRyba.x = xRyba;
+        poziceRyba.y = yRyba;
+        labRyba.setLocation(poziceRyba);
+    }
+
+    private void kolize() {
+        AX = xRyba;
+        AY = yRyba;
+        BX = xRyba + rybaSirka;
+        BY = yRyba + rybaVyska;
+        CX = xZralok;
+        CY = yZralok;
+        DX = xZralok + zralokSirka;
+        DY = yZralok + zralokVyska;
+
+        if (BX > CX && BX < DX && BY > CY && BY < DY) {
+            srazka();
+        }
+        if (AX < DX && AX > CX && AY < DY && AY > CY) {
+            srazka();
+        }
+    }
+
     private void priTiknutiCasovace(ActionEvent e) {
         if (delkaSmrti > 0) {
             delkaSmrti--;
@@ -55,99 +157,12 @@ public class HlavniOkno extends JFrame {
 
         } else {
 
-            Point poziceZraloka;
-            Point poziceRyba;
-            Integer xRyba;
-            Integer yRyba;
-            Integer rybaSirka;
-            rybaSirka = labRyba.getWidth();
-            Integer rybaVyska;
-            rybaVyska = labRyba.getHeight();
-            Integer xZralok;
-            Integer yZralok;
-            Integer zralokSirka;
-            zralokSirka = labZralok.getWidth();
-            Integer zralokVyska;
-            zralokVyska = labZralok.getHeight();
-            poziceZraloka = labZralok.getLocation();
-            xZralok = poziceZraloka.x;
-            yZralok = poziceZraloka.y;
+            pohybZraloka();
+            pohybRyby();
 
-            if (xZralok < 0) {
-                posunX = 5;
-            }
-            if (xZralok + zralokSirka > contentPane.getWidth()) {
-                posunX = -5;
-            }
-            if (yZralok < 0) {
-                posunY = 5;
-            }
-            if (yZralok + zralokVyska > contentPane.getHeight()) {
-                posunY = -5;
-            }
-
-            xZralok = xZralok + posunX;
-            yZralok = yZralok + posunY;
-
-            poziceZraloka.x = xZralok;
-            poziceZraloka.y = yZralok;
-
-            labZralok.setLocation(poziceZraloka);
-
-            poziceRyba = labRyba.getLocation();
-
-            xRyba = poziceRyba.x;
-            yRyba = poziceRyba.y;
-            if (klavesnice.isKeyDown(KeyEvent.VK_UP)) {
-                if (yRyba > 0) {
-                    yRyba = yRyba - 5;
-                }
-            }
-            if (klavesnice.isKeyDown(KeyEvent.VK_DOWN)) {
-                if (yRyba + rybaVyska < contentPane.getHeight()) {
-                    yRyba = yRyba + 5;
-                }
-            }
-            if (klavesnice.isKeyDown(KeyEvent.VK_LEFT)) {
-                labRyba.setIcon(new ImageIcon(getClass().getResource("/net/sevecek/Nemo-vlevo.png")));
-                if (xRyba > 0) {
-                    xRyba = xRyba - 5;
-                }
-            }
-            if (klavesnice.isKeyDown(KeyEvent.VK_RIGHT)) {
-                labRyba.setIcon(new ImageIcon(getClass().getResource("/net/sevecek/Nemo-vpravo.png")));
-                if (xRyba + rybaSirka < contentPane.getWidth()) {
-                    xRyba = xRyba + 5;
-                }
-            }
-            poziceRyba.x = xRyba;
-            poziceRyba.y = yRyba;
-            labRyba.setLocation(poziceRyba);
-
-            Integer AX;
-            AX = xRyba;
-            Integer AY;
-            AY = yRyba;
-            Integer BX;
-            BX = xRyba + rybaSirka;
-            Integer BY;
-            BY = yRyba + rybaVyska;
-            Integer CX;
-            CX = xZralok;
-            Integer CY;
-            CY = yZralok;
-            Integer DX;
-            DX = xZralok + zralokSirka;
-            Integer DY;
-            DY = yZralok + zralokVyska;
-
-            if (BX > CX && BX < DX && BY > CY && BY < DY) {
-                srazka();
-            }
-            if (AX < DX && AX > CX && AY < DY && AY > CY) {
-                srazka();
-            }
+            kolize();
         }
+
     }
 
     private void initComponents() {
@@ -167,7 +182,6 @@ public class HlavniOkno extends JFrame {
             public void windowClosed(WindowEvent e) {
                 priZavreniOkna(e);
             }
-
             @Override
             public void windowOpened(WindowEvent e) {
                 priOtevreniOkna(e);
@@ -192,7 +206,7 @@ public class HlavniOkno extends JFrame {
 
         { // compute preferred size
             Dimension preferredSize = new Dimension();
-            for (int i = 0; i < contentPane.getComponentCount(); i++) {
+            for(int i = 0; i < contentPane.getComponentCount(); i++) {
                 Rectangle bounds = contentPane.getComponent(i).getBounds();
                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
