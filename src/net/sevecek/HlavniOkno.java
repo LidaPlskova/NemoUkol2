@@ -139,10 +139,10 @@ public class HlavniOkno extends JFrame {
         DX = xZralok + zralokSirka;
         DY = yZralok + zralokVyska;
 
-        if (BX > CX && BX < DX && BY > CY && BY < DY) {
+        if (BX >= CX && BX <= DX && BY >= CY && BY <= DY) {
             srazka();
         }
-        if (AX < DX && AX > CX && AY < DY && AY > CY) {
+        if (AX <= DX && AX >= CX && AY <= DY && AY >= CY) {
             srazka();
         }
     }
