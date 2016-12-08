@@ -55,7 +55,7 @@ public class HlavniOkno extends JFrame {
             pohybZraloka();
             pohybRyby();
 
-            detekujKolizi();
+            detekujKolizi(labRyba,labZralok);
         }
 
     }
