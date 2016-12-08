@@ -42,6 +42,24 @@ public class HlavniOkno extends JFrame {
         initComponents();
     }
 
+    private void priTiknutiCasovace(ActionEvent e) {
+        if (delkaSmrti > 0) {
+            delkaSmrti--;
+
+            if (delkaSmrti == 0) {
+                novyZacatek();
+            }
+
+        } else {
+
+            pohybZraloka();
+            pohybRyby();
+
+            detekujKolizi();
+        }
+
+    }
+
     private void srazka() {
         delkaSmrti = 25;
         labRyba.setIcon(new ImageIcon(getClass().getResource("/net/sevecek/mrtvyNemo-vpravo.png")));
@@ -129,7 +147,7 @@ public class HlavniOkno extends JFrame {
         labRyba.setLocation(poziceRyba);
     }
 
-    private void kolize() {
+    private void detekujKolizi(JLabel postava1, JLabel postava2 ) {
         AX = xRyba;
         AY = yRyba;
         BX = xRyba + rybaSirka;
@@ -145,24 +163,6 @@ public class HlavniOkno extends JFrame {
         if (AX <= DX && AX >= CX && AY <= DY && AY >= CY) {
             srazka();
         }
-    }
-
-    private void priTiknutiCasovace(ActionEvent e) {
-        if (delkaSmrti > 0) {
-            delkaSmrti--;
-
-            if (delkaSmrti == 0) {
-                novyZacatek();
-            }
-
-        } else {
-
-            pohybZraloka();
-            pohybRyby();
-
-            kolize();
-        }
-
     }
 
     private void initComponents() {
